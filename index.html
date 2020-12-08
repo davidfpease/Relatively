@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <link rel="stylesheet" href="./dist/main.css" />
+  <title>Relatively</title>
+</head>
+
+<body>
+  <div class="fixed">
+    <div class="user-input">
+      <div class="question">
+        Enter a dollar amount to compare relatively: <input id="dollar_input" type="text" name="userInput" required>
+      </div>
+      <div class="question">
+        Choose a comparator: 
+        <select id="comparators" name="dropdown">
+          <option value="empty" selected disabled>None</option>
+          <option value="burger" >Cheeseburger</option>
+          <option value="house">House</option>
+          <option value="middle-school">Middle School</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <!-- <div id="whiteboard"></div> -->
+  <canvas></canvas>
+  <script src="./dist/main.js"></script>
+</body>
+
+</html>
