@@ -19,7 +19,7 @@ In Relatively, visitors will be able to:
 ### File Structure
 - /dist
 - /src
-  - /assets
+  - /assets^
     - hamburger.svg
     - house.svg
     - college.svg
@@ -48,3 +48,7 @@ In Relatively, visitors will be able to:
 - 12/9: Add dropdown menu and associated calculations per menu item
 - 12/10: Add zoom functionality
 - 12/11: Styling touches and production README
+
+
+^SVGS are from Font Awesome (https://fontawesome.com/license)
+^Font is Montserrat: https://fonts.google.com/specimen/Montserrat

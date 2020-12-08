@@ -1,15 +1,30 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+}
+
 .fixed {
   position: fixed;
-  width: 100%;
-  margin: 0 auto;
-  padding-top: 20px;
+  padding: 20px;
+  background-color: rgba(128,159,191,.5);
+  border-radius: 25px;
+  z-index: 2;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 990px;
 }
 
 .user-input {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  
-
 }
 
+.total {
+  font-size: 40px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(100,0,255,.5);
+}

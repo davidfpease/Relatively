@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <link rel="stylesheet" href="./dist/main.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
   <title>Relatively</title>
 </head>
 
@@ -18,15 +20,17 @@
       </div>
       <div class="question">
         Choose a comparator: 
-        <select id="comparators" name="dropdown">
-          <option value="empty" selected disabled>None</option>
-          <option value="burger" >Cheeseburger</option>
+        <select id="comps" name="dropdown">
+          <option value="empty"  disabled>None</option>
+          <option value="burger" selected>Cheeseburger</option>
           <option value="house">House</option>
           <option value="middle-school">Middle School</option>
         </select>
       </div>
     </div>
   </div>
+  <div class='total'></div>
+  <div class="current-view"></div>
   <!-- <div id="whiteboard"></div> -->
   <canvas></canvas>
   <script src="./dist/main.js"></script>
