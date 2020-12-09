@@ -1,3 +1,5 @@
+
+
 body {
   font-family: 'Montserrat', sans-serif;
   box-sizing: border-box;
@@ -5,13 +7,14 @@ body {
 
 .fixed {
   position: fixed;
-  padding: 20px;
-  background-color: rgba(128,159,191,.5);
+  padding: 5px 0px 5px 0px;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 25px;
   z-index: 2;
+  top: 5%;
   left: 50%;
   transform: translateX(-50%);
-  width: 990px;
+  width: 1100px;
 }
 
 .user-input {
@@ -27,4 +30,61 @@ body {
   left: 50%;
   transform: translateX(-50%);
   color: rgba(100,0,255,.5);
+  pointer-events: none;
+
+}
+
+.contact-info {
+  position: fixed;
+  display: flex;
+  top: 86%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 292px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px;
+  background-color: rgba(255,255,255,.8);
+  border-radius: 17px;
+  z-index: 2;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 97px;
+}
+
+#dollar_input, #comps{
+  border: none;
+  border-bottom: 1px solid black;
+  margin-left: 8px;
+  font-family: 'Montserrat';
+  font-size: 16px;
+  color: #606060;
+}
+
+#dollar_input, #comps:focus {
+  outline: none;
+  color: black;
+}
+
+.reset-button {
+  font-family: 'Montserrat';
+  font-size: 16px;
+  border: none;
+  padding: 10px;
+  border-radius: 9px;
+  background-color: white;
+}
+
+.reset-button:hover {
+  background-color: lightgray;
+  color: #606060;
+  cursor: pointer;
+}
+
+a {
+  color: #606060;
+
 }

@@ -9,6 +9,7 @@ import { comparators } from "./scripts/data.js";
 const comps = comparators;
 // get user input value
 let userInputDollar = document.getElementById("dollar_input");
+const userCompSelection = document.getElementById('comps');
 
 const burger = new Image();
 burger.src = './src/assets/hamburger-solid.svg';
@@ -25,6 +26,26 @@ userInputDollar.addEventListener("keydown", e => {
     document.getElementById('dollar_input').value = '';
   }
 });
+
+userCompSelection.addEventListener("keydown", e => {
+  if (e.key === 'Enter') {
+    //add a validation function to check user input first
+    drawGraph();
+    document.getElementById('dollar_input').value = '';
+  }
+});
+
+document.querySelector(".reset-button").addEventListener("click", reset);
+
+function reset(e) {
+  let canvas = document.querySelector("canvas");
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,canvas.width, canvas.height);
+  document.getElementById('dollar_input').value = '';
+  document.getElementById('comps').value = 'None';
+  d3.select(".total").text('');
+
+}
 
 
 
@@ -44,7 +65,10 @@ function drawGraph() {
  
   const totalComparators = Math.ceil(userInput/comparatorValue);
   const numColumns = Math.ceil(Math.sqrt(totalComparators));
-  const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+
+
+  let body = document.querySelector('body');
+  const vw = body.offsetWidth + parseInt(getComputedStyle(body).borderRightWidth);
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
   const itemWidth = vw/numColumns;
   console.log(itemWidth);
@@ -68,7 +92,7 @@ function drawGraph() {
     i++;
   }
   
-  addColors(data, numColumns);
+  //addColors(data, numColumns);
   
   const whiteBoard = d3.select("canvas")
   .call(d3.zoom()
@@ -79,7 +103,9 @@ function drawGraph() {
   
   const context = whiteBoard.node().getContext("2d");
   
-  d3.select(".total").text(totalComparators + ` ${comparator}s!`);
+  // d3.select(".total").text(totalComparators + ` ${comparator}s!`)
+  //   .transition().style("font-size", "100px").duration(1000);
+  //   //.transition().position();
 
   draw();
   
@@ -97,14 +123,26 @@ function drawGraph() {
     let i = -1;
     let n = data.length;
     let d;
+    context.beginPath();
     while (++i < n) {
-      context.beginPath();
       d = data[i];
       context.moveTo(d[0], d[1]);
       context.drawImage(image, d[0], d[1], itemWidth - (.2 * itemWidth), itemWidth - (.2 * itemWidth));
       //context.arc(d[0], d[1], itemWidth/2, 0, 2 * Math.PI);
      
     }
+    context.font = '75px Montserrat';
+    context.fillStyle = '#b34d4d';
+    context.textAlign= "center";
+    context.strokeStyle= "black";
+    context.miterLimit = 2;
+    context.lineJoin = 'circle';
+    context.lineWidth = 2;
+    context.strokeText(`${totalComparators} ${userCompSelection.value}s!`, vw / 2, vh * .4);
+    context.lineWidth = 1;
+    context.fillText(`${totalComparators} ${userCompSelection.value}s!`,vw/2,vh*.4)
+
+
   }
 }
 
