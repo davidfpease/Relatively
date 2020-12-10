@@ -16,6 +16,29 @@ export const comparators = {
 
 }
 
+export function validData() {
+  let userInputDollar = document.getElementById("dollar_input");
+  const userCompSelection = document.getElementById('comps');
+  let inputValueNoCommmas = userInputDollar.value.replace(/,/g, '');
+  let numCheck = /^\d+$/.test(inputValueNoCommmas);
+
+  if (numCheck && userCompSelection.value !== 'empty' && inputValueNoCommmas.length >0){
+    return true;
+  } else {
+    return false;
+  }
+
+}
+
+export function reset(e) {
+  let canvas = document.querySelector("canvas");
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  document.getElementById('dollar_input').value = '';
+  document.getElementById('comps').value = 'empty';
+  d3.select(".total").text('');
+
+}
 //export const burger = new Image
 
 
