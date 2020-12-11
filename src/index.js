@@ -70,7 +70,7 @@ document.querySelector(".dod-button").addEventListener("click", () => {
   getDoDData().then(totalAwarded => {
     userInputDollar.value = totalAwarded.toLocaleString('en',{ useGrouping: true});
     userCompSelection.value = "middle-school";
-    debugger;
+    ;
     drawGraph();
   });
 });

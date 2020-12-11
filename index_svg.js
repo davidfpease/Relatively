@@ -16,7 +16,7 @@ function drawGraph() {
   let userInput = 100000;//document.getElementById('dollar_input').value;
   let comparatorValue = 4;//comps[document.getElementById('comparators').value];
   let totalComparators = Math.ceil(userInput/comparatorValue);
-debugger;
+;
   // 
   const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
