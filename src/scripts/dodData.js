@@ -10,7 +10,8 @@ export function getDoDData() {
       const links = indexDoc.querySelectorAll('a');
       for (var i = 0; i < links.length; i++) {
         if (links[i].textContent.includes("Contracts For")) {
-          return fetch(links[i].href);
+          //debugger;
+          return fetch(links[i].replace('http', 'https'));
         }
       }
     })
