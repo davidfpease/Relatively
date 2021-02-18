@@ -67,7 +67,7 @@ userCompSelection.addEventListener("keydown", e => {
 document.querySelector(".reset-button").addEventListener("click", reset);
 
 document.querySelector(".dod-button").addEventListener("click", () => {
-  getDoDData().then(totalAwarded => {
+  dod.then(totalAwarded => {
     userInputDollar.value = totalAwarded.toLocaleString('en',{ useGrouping: true});
     userCompSelection.value = "middle-school";
     ;

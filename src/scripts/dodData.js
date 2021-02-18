@@ -34,14 +34,15 @@ function getTotalFromText(textArray){
   let numbers = [];
 
   for (let i = 0; i < textArray.length; i++){
-    //console.log(textArray[i]);
+    console.log(textArray[i]);
     let para = textArray[i];
     
-    let awardIndex = para.indexOf("awarded a $");
+    let awardIndex = para.indexOf("$");
     if (awardIndex > -1){
-      let subString = para.slice(awardIndex + 11, awardIndex + 31);
+      let subString = para.slice(awardIndex+1, awardIndex + 30);
       subString = parseInt(subString.slice(0, subString.indexOf(" ")).replace(/,/g, ''));
       numbers.push(subString);
+      debugger;
     }
   }
   return numbers.reduce((a,b)=> a + b );
