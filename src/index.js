@@ -91,6 +91,12 @@ function drawGraph() {
 
  
   const totalComparators = Math.ceil(userInput/comparatorValue);
+  if(totalComparators > 50000){
+    alert("Too many!");
+
+
+  }
+
   const totalComparatorsCommas = totalComparators.toLocaleString('en', { useGrouping: true })
   const numColumns = Math.ceil(Math.sqrt(totalComparators));
 
@@ -130,10 +136,6 @@ function drawGraph() {
   .attr("height",vh);
   
   const context = whiteBoard.node().getContext("2d");
-  
-  // d3.select(".total").text(totalComparators + ` ${comparator}s!`)
-  //   .transition().style("font-size", "100px").duration(1000);
-  //   //.transition().position();
 
   draw();
   

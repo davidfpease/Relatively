@@ -42,7 +42,7 @@ function getTotalFromText(textArray){
       let subString = para.slice(awardIndex+1, awardIndex + 30);
       subString = parseInt(subString.slice(0, subString.indexOf(" ")).replace(/,/g, ''));
       numbers.push(subString);
-      debugger;
+      
     }
   }
   return numbers.reduce((a,b)=> a + b );
