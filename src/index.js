@@ -1,5 +1,6 @@
 import { comparators, reset, validData } from "./scripts/util.js";
 import { getDoDData } from "./scripts/dodData.js";
+import { drawGraph } from "./scripts/chart.js";
 import "./styles/index.scss";
 // SVG images from FontAwesome
 // https://fontawesome.com/license
@@ -70,142 +71,110 @@ document.querySelector(".dod-button").addEventListener("click", () => {
   dod.then(totalAwarded => {
     userInputDollar.value = totalAwarded.toLocaleString('en',{ useGrouping: true});
     userCompSelection.value = "middle-school";
-    ;
     drawGraph();
   });
 });
 
 
-function drawGraph() {
-  const userInput = document.getElementById('dollar_input').value.replace(/,/g, '');
-  const comparator = document.getElementById('comps').value;
-  const comparatorValue = comps[comparator];
-  let image;
-  if (comparator === "burger"){
-    image = burger;
-  } else if (comparator === "house"){
-    image = house;
-  } else {
-    image = school;
-  }
+// function drawGraph() {
+//   const userInput = document.getElementById('dollar_input').value.replace(/,/g, '');
+//   const comparator = document.getElementById('comps').value;
+//   const comparatorValue = comps[comparator];
+//   let image;
+//   if (comparator === "burger"){
+//     image = burger;
+//   } else if (comparator === "house"){
+//     image = house;
+//   } else {
+//     image = school;
+//   }
 
  
-  const totalComparators = Math.ceil(userInput/comparatorValue);
-  if(totalComparators > 50000){
-    alert("Too many!");
+//   const totalComparators = Math.ceil(userInput/comparatorValue);
+//   if(totalComparators > 50000){
+//     alert("Too many!");
+//   }
 
-
-  }
-
-  const totalComparatorsCommas = totalComparators.toLocaleString('en', { useGrouping: true })
-  const numColumns = Math.ceil(Math.sqrt(totalComparators));
-
-
-  let body = document.querySelector('body');
-  const vw = body.offsetWidth + parseInt(getComputedStyle(body).borderRightWidth);
-  const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
-  const itemWidth = vw/numColumns;
+//   const totalComparatorsCommas = totalComparators.toLocaleString('en', { useGrouping: true })
   
+
+
+//   let body = document.querySelector('body');
+//   const vw = body.offsetWidth + parseInt(getComputedStyle(body).borderRightWidth);
+//   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+//   const itemWidth = 4.5;
+//   const numColumns = Math.floor(vw/itemWidth);
 
   
   
-  let data = [];
-  let row = itemWidth/2;
-  let x = itemWidth/2;
-  let i = 0;
+//   let data = [];
+//   let row = itemWidth/2;
+//   let x = itemWidth/2;
+//   let i = 0;
 
   
 
-  //build grid 
-  while (i < totalComparators) {
-    let column = i % numColumns;
-    if (i>0 && column === 0){
-      row += itemWidth;
-    }
-    data.push([x + (column * itemWidth),row]);
-    i++;
-  }
+//   //build grid 
+//   while (i < totalComparators) {
+//     let column = i % numColumns;
+//     if (i>0 && column === 0){
+//       row += itemWidth;
+//     }
+//     data.push([x + (column * itemWidth),row]);
+//     i++;
+//   }
   
-  //addColors(data, numColumns);
-  
-  const whiteBoard = d3.select("canvas")
-  .call(d3.zoom()
-  .scaleExtent([.1, 8])
-  .on("zoom", zoom))
-  .attr("width", vw)
-  .attr("height",vh);
-  
-  const context = whiteBoard.node().getContext("2d");
+//   //addColors(data, numColumns);
 
-  draw();
+
   
-  function zoom() {
-    var transform = d3.event.transform;
-    context.save();
-    context.clearRect(0, 0, vw, vw);
-    context.translate(transform.x, transform.y);
-    context.scale(transform.k, transform.k);
-    draw();
-    context.restore();
-  }
+//   const whiteBoard = d3.select("canvas")
+//   // .call(d3.zoom()
+//   // .scaleExtent([.1, 8])
+//   // .on("zoom", zoom))
+//   .attr("width", vw)
+//   .attr("height",vh);
   
-  function draw() {
-    let i = -1;
-    let n = data.length;
-    let d;
-    context.beginPath();
-    while (++i < n) {
-      d = data[i];
-      context.moveTo(d[0], d[1]);
-      context.drawImage(image, d[0], d[1], itemWidth - (.2 * itemWidth), itemWidth - (.2 * itemWidth));
-      //context.arc(d[0], d[1], itemWidth/2, 0, 2 * Math.PI);
+//   const context = whiteBoard.node().getContext("2d");
+
+//   draw();
+  
+//   // function zoom() {
+//   //   var transform = d3.event.transform;
+//   //   context.save();
+//   //   context.clearRect(0, 0, vw, vw);
+//   //   context.translate(transform.x, transform.y);
+//   //   context.scale(transform.k, transform.k);
+//   //   draw();
+//   //   context.restore();
+//   // }
+  
+//   function draw() {
+//     let i = -1;
+//     let n = data.length;
+//     let d;
+//     context.beginPath();
+//     while (++i < n) {
+//       d = data[i];
+//       context.moveTo(d[0], d[1]);
+//       context.drawImage(image, d[0], d[1], itemWidth - (.2 * itemWidth), itemWidth - (.2 * itemWidth));
+//       //context.arc(d[0], d[1], itemWidth/2, 0, 2 * Math.PI);
      
-    }
-    context.font = '75px Montserrat';
-    context.fillStyle = '#b34d4d';
-    context.textAlign= "center";
-    context.strokeStyle= "black";
-    context.miterLimit = 2;
-    context.lineJoin = 'circle';
-    context.lineWidth = 2;
-    context.strokeText(`${totalComparatorsCommas} ${userCompSelection.value}s!`, vw / 2, vh * .4);
-    context.lineWidth = 1;
-    context.fillText(`${totalComparatorsCommas} ${userCompSelection.value}s!`,vw/2,vh*.4)
+//     }
+//     context.font = '75px Montserrat';
+//     context.fillStyle = '#b34d4d';
+//     context.textAlign= "center";
+//     context.strokeStyle= "black";
+//     context.miterLimit = 2;
+//     context.lineJoin = 'circle';
+//     context.lineWidth = 2;
+//     context.strokeText(`${totalComparatorsCommas} ${userCompSelection.value}s!`, vw / 2, vh * .4);
+//     context.lineWidth = 1;
+//     context.fillText(`${totalComparatorsCommas} ${userCompSelection.value}s!`,vw/2,vh*.4)
 
 
-  }
-}
+//   }
+// }
 
-
-
-const addColors = function(data, columns) {
-  let length = data.length;
-  let step = Math.ceil(254/columns);
-  let r = 0;
-  let g = 255;
-  let b = 0;
-  let i = 0;
-  let index = 0;
-  let colorArray = [];
-
-  while (i < length) {
-    let colNum = i % columns;
-
-    if (i > 0 && r >= 255) {
-      r = 0;
-    }
-    if (i > 0 && g <= 0) {
-      g = 255;
-    }
-    if (i > 0 && b >= 255) {
-      b = 0;
-    }
-    data[i].push(`rgb(${r},${g},${b})`);
-    r += step;
-    g -= step;
-    b += step;
-    i++;
-  }
-}
 
 

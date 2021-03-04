@@ -23,7 +23,7 @@ export function getDoDData() {
       for (let i = 0; i < paragraphs.length; i ++){
         paraText.push(paragraphs[i].innerText);
       }
-
+      
       return getTotalFromText(paraText);
     });
 
@@ -34,7 +34,7 @@ function getTotalFromText(textArray){
   let numbers = [];
 
   for (let i = 0; i < textArray.length; i++){
-    console.log(textArray[i]);
+    
     let para = textArray[i];
     
     let awardIndex = para.indexOf("$");
@@ -42,6 +42,7 @@ function getTotalFromText(textArray){
       let subString = para.slice(awardIndex+1, awardIndex + 30);
       subString = parseInt(subString.slice(0, subString.indexOf(" ")).replace(/,/g, ''));
       numbers.push(subString);
+      console.log(subString);
       
     }
   }
